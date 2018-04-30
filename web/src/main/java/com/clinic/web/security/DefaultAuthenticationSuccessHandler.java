@@ -23,7 +23,7 @@ public class DefaultAuthenticationSuccessHandler extends SavedRequestAwareAuthen
         if (authorities.contains(new SimpleGrantedAuthority("ROLE_EMPLOYEE"))) {
             getRedirectStrategy().sendRedirect(request, response, "/employee");
         } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-            getRedirectStrategy().sendRedirect(request, response, "/user");
+            getRedirectStrategy().sendRedirect(request, response, "/patient");
         }
     }
 }

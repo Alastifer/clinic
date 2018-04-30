@@ -15,6 +15,10 @@ public class DefaultEmployeeService implements EmployeeService {
 
     @Override
     public Employee getEmployee(String username) throws IllegalArgumentException {
+        if (username == null) {
+            throw new IllegalArgumentException();
+        }
+
         Optional<Employee> employee = employeeDAO.getEmployee(username);
         if (employee.isPresent()) {
             return employee.get();

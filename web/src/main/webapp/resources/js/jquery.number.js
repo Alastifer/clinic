@@ -213,7 +213,7 @@
 
 
 
-                        // Stop executing if the user didn't type a number key, a decimal character, backspace, or delete.
+                        // Stop executing if the patient didn't type a number key, a decimal character, backspace, or delete.
                         if( code != 8 && code != 45 && code != 127 && chara != dec_point && !chara.match(/[0-9]/) )
                         {
                             // We need the original keycode now...
@@ -289,7 +289,7 @@
                         data.isPartialSelection = start == end ? false : true;
 
                         // If the start position is before the decimal point,
-                        // and the user has typed a decimal point, we need to move the caret
+                        // and the patient has typed a decimal point, we need to move the caret
                         // past the decimal place.
                         if( decimals > 0 && chara == dec_point && start == this.value.length-decimals-1 )
                         {
@@ -307,7 +307,7 @@
                             e.preventDefault();
                         }
 
-                        // If the user is just typing the decimal place,
+                        // If the patient is just typing the decimal place,
                         // we simply ignore it.
                         else if( chara == dec_point )
                         {
@@ -403,7 +403,7 @@
                             setPos = this.value.length+data.c;
                         }
 
-                        // If the caret is to the right of the decimal place, and the user is entering a
+                        // If the caret is to the right of the decimal place, and the patient is entering a
                         // number, remove the following character before putting in the new one.
                         else if(
                             decimals > 0 &&
@@ -475,7 +475,7 @@
                             setSelectionRange.apply(this, [setPos, setPos]);
                         }
 
-                        // Stop executing if the user didn't type a number key, a decimal, or a comma.
+                        // Stop executing if the patient didn't type a number key, a decimal, or a comma.
                         if( this.value === '' || (code < 48 || code > 57) && (code < 96 || code > 105 ) && code !== 8 && code !== 46 && code !== 110 ) return;
 
                         // Re-format the textarea.

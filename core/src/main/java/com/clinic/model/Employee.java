@@ -1,12 +1,10 @@
 package com.clinic.model;
 
-import com.clinic.model.enums.Position;
-
 public class Employee {
     private String username;
     private String firstName;
     private String lastName;
-    private Position position;
+    private String position;
 
     public String getUsername() {
         return username;
@@ -32,11 +30,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Position getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 }

@@ -2,7 +2,7 @@ package com.clinic.web.facade.impl;
 
 import com.clinic.model.Employee;
 import com.clinic.service.EmployeeService;
-import com.clinic.web.dto.EmployeeData;
+import com.clinic.web.model.EmployeeModel;
 import com.clinic.web.facade.EmployeeFacade;
 import org.springframework.stereotype.Component;
 
@@ -14,14 +14,14 @@ public class DefaultEmployeeFacade implements EmployeeFacade {
     private EmployeeService employeeService;
 
     @Override
-    public EmployeeData getEmployee(String username) {
+    public EmployeeModel getEmployee(String username) {
         Employee employee = employeeService.getEmployee(username);
-        EmployeeData employeeData = new EmployeeData();
+        EmployeeModel employeeModel = new EmployeeModel();
 
-        employeeData.setUsername(employee.getUsername());
-        employeeData.setFirstName(employee.getFirstName());
-        employeeData.setLastName(employee.getLastName());
-        employeeData.setPosition(employee.getPosition());
-        return employeeData;
+        employeeModel.setUsername(employee.getUsername());
+        employeeModel.setFirstName(employee.getFirstName());
+        employeeModel.setLastName(employee.getLastName());
+        employeeModel.setPosition(employee.getPosition());
+        return employeeModel;
     }
 }

@@ -1,7 +1,7 @@
 package com.clinic.web.facade;
 
-import com.clinic.web.dto.PatientData;
+import com.clinic.web.model.PatientModel;
 
 public interface PatientFacade {
-    PatientData getPatient(String username);
+    PatientModel getPatient(String username);
 }

@@ -23,6 +23,6 @@ public class EmployeeController {
     public String getEmployee(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
         model.addAttribute(ATTRIBUTE_EMPLOYEE, employeeFacade.getEmployee(username));
-        return "employee";
+        return "employee/employee";
     }
 }

@@ -2,7 +2,7 @@ package com.clinic.web.facade.impl;
 
 import com.clinic.model.Patient;
 import com.clinic.service.PatientService;
-import com.clinic.web.dto.PatientData;
+import com.clinic.web.model.PatientModel;
 import com.clinic.web.facade.PatientFacade;
 import org.springframework.stereotype.Component;
 
@@ -14,16 +14,16 @@ public class DefaultPatientFacade implements PatientFacade {
     private PatientService patientService;
 
     @Override
-    public PatientData getPatient(String username) {
+    public PatientModel getPatient(String username) {
         Patient patient = patientService.getPatient(username);
-        PatientData patientData = new PatientData();
+        PatientModel patientModel = new PatientModel();
 
-        patientData.setUsername(patient.getUsername());
-        patientData.setAddress(patient.getAddress());
-        patientData.setBirthDay(patient.getBirthDay());
-        patientData.setFirstName(patient.getFirstName());
-        patientData.setLastName(patient.getLastName());
-        patientData.setPhoneNumber(patient.getPhoneNumber());
-        return patientData;
+        patientModel.setUsername(patient.getUsername());
+        patientModel.setAddress(patient.getAddress());
+        patientModel.setBirthDay(patient.getBirthDay());
+        patientModel.setFirstName(patient.getFirstName());
+        patientModel.setLastName(patient.getLastName());
+        patientModel.setPhoneNumber(patient.getPhoneNumber());
+        return patientModel;
     }
 }

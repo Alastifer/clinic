@@ -2,8 +2,6 @@ package com.clinic.dao.impl;
 
 import com.clinic.dao.EmployeeDAO;
 import com.clinic.model.Employee;
-import com.clinic.model.Patient;
-import com.clinic.model.enums.Position;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -34,7 +32,7 @@ public class DefaultEmployeeDAO implements EmployeeDAO {
             employee.setUsername(rs.getString("username"));
             employee.setFirstName(rs.getString("first_name"));
             employee.setLastName(rs.getString("last_name"));
-            employee.setPosition(Position.valueOf(rs.getString("position")));
+            employee.setPosition(rs.getString("position"));
             return employee;
         }
     }

@@ -7,8 +7,8 @@
 	http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http>
-        <intercept-url pattern="/admin/**" access="ROLE_EMPLOYEE"/>
-        <intercept-url pattern="/user/**" access="ROLE_USER"/>
+        <intercept-url pattern="/employee/**" access="ROLE_EMPLOYEE"/>
+        <intercept-url pattern="/patient/**" access="ROLE_USER"/>
         <form-login login-page="/login"
                     username-parameter="id_user"
                     password-parameter="password"
