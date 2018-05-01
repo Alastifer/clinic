@@ -55,7 +55,7 @@
                                 </table>
 
                                 <a href="${pageContext.request.contextPath}/patient/diseases" class="btn btn-primary">Истории болезней</a>
-                                <a href="" class="btn btn-primary">Анализы</a>
+                                <a href="${pageContext.request.contextPath}/patient/analyzes" class="btn btn-primary">Анализы</a>
                                 <a href="" class="btn btn-primary">Талоны</a>
                             </div>
                         </div>

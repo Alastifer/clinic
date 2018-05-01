@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class DiseasesListController {
+public class DiseaseController {
     @Resource
     private DiseaseFacade diseaseFacade;
 

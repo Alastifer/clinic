@@ -17,26 +17,26 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    private static final String SELECT_ALL_DISEASES = "SELECT patients.username AS username, diseases.id AS diseaseId, " +
-                                                      "begin_date, end_date, disease_types.name AS disease, content " +
-                                                      "FROM patients JOIN diseases ON patients.username = diseases.username " +
-                                                      "JOIN disease_types ON diseases.id_type = disease_types.id " +
-                                                      "WHERE patients.username = ?";
+    private static final String SELECT_ALL_DISEASES_BY_USERNAME = "SELECT username, diseases.id AS diseaseId, begin_date, " +
+                                                                  "end_date, disease_types.name AS disease, content " +
+                                                                  "FROM diseases " +
+                                                                  "JOIN disease_types ON diseases.id_type = disease_types.id " +
+                                                                  "WHERE username = ?";
 
-    private static final String SELECT_DISEASE = "SELECT patients.username AS username, diseases.id AS diseaseId, " +
-                                                 "begin_date, end_date, disease_types.name AS disease, content " +
-                                                 "FROM patients JOIN diseases ON patients.username = diseases.username " +
-                                                 "JOIN disease_types ON diseases.id_type = disease_types.id " +
-                                                 "WHERE patients.username = ? AND diseases.id = ?";
+    private static final String SELECT_DISEASE_BY_USERNAME_AND_ID = "SELECT username, diseases.id AS diseaseId, begin_date, " +
+                                                                    "end_date, disease_types.name AS disease, content " +
+                                                                    "FROM diseases " +
+                                                                    "JOIN disease_types ON diseases.id_type = disease_types.id " +
+                                                                    "WHERE username = ? AND diseases.id = ?";
 
     @Override
     public List<Disease> getDiseases(String username) {
-        return jdbcTemplate.query(SELECT_ALL_DISEASES, new DiseaseRowMapper(), username);
+        return jdbcTemplate.query(SELECT_ALL_DISEASES_BY_USERNAME, new DiseaseRowMapper(), username);
     }
 
     @Override
     public Optional<Disease> getDisease(Long id, String username) {
-        List<Disease> diseases = jdbcTemplate.query(SELECT_DISEASE, new DiseaseRowMapper(), username, id);
+        List<Disease> diseases = jdbcTemplate.query(SELECT_DISEASE_BY_USERNAME_AND_ID, new DiseaseRowMapper(), username, id);
         if (diseases.isEmpty()) {
             return Optional.empty();
         }
