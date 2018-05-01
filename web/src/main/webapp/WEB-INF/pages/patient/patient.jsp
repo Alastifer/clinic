@@ -25,7 +25,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                            <div class="col-md-3 col-lg-3 " align="center">
+                                <img alt="Пациент" src="<c:url value="/resources/img/patient.png"/>" class="img-responsive">
+                            </div>
                             <div class=" col-md-9 col-lg-9 ">
                                 <table class="table table-user-information">
                                     <tbody>
@@ -41,7 +43,6 @@
                                         <td>Дата рождения</td>
                                         <td><fmt:formatDate value="${patient.birthDay}" pattern="dd-MM-yyyy"/></td>
                                     </tr>
-                                    <tr>
                                     <tr>
                                         <td>Адрес</td>
                                         <td>${patient.address}</td>

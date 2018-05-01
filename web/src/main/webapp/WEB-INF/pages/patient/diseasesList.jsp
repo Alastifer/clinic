@@ -39,7 +39,7 @@
             <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
         </div>
         <div class="row float-l">
-            <a href="javascript:history.go(-1)" class="btn btn-primary m-t-10">Назад</a>
+            <a href="${pageContext.request.contextPath}/patient" class="btn btn-primary m-t-10">Профиль</a>
         </div>
         <div class="container-table100">
             <div class="wrap-table100">
@@ -51,7 +51,7 @@
                                 <th class="cell100 column1">Номер истории болезни</th>
                                 <th class="cell100 column2">Дата начала</th>
                                 <th class="cell100 column3">Дата окончания</th>
-                                <th class="cell100 column4">Заболевание</th>
+                                <th class="cell100 column4">Диагноз</th>
                                 <th class="cell100 column5">Содержание</th>
                             </tr>
                             </thead>
@@ -71,7 +71,7 @@
                                         </td>
                                         <td class="cell100 column4">${disease.type}</td>
                                         <td class="cell100 column5">
-                                            <a href="" class="btn btn-primary">Содержание</a>
+                                            <a href="${pageContext.request.contextPath}/patient/diseases/${disease.id}" class="btn btn-primary">Содержание</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

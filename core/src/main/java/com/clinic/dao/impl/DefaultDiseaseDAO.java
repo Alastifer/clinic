@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DefaultDiseaseDAO implements DiseaseDAO {
@@ -22,9 +23,24 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
                                                       "JOIN disease_types ON diseases.id_type = disease_types.id " +
                                                       "WHERE patients.username = ?";
 
+    private static final String SELECT_DISEASE = "SELECT patients.username AS username, diseases.id AS diseaseId, " +
+                                                 "begin_date, end_date, disease_types.name AS disease, content " +
+                                                 "FROM patients JOIN diseases ON patients.username = diseases.username " +
+                                                 "JOIN disease_types ON diseases.id_type = disease_types.id " +
+                                                 "WHERE patients.username = ? AND diseases.id = ?";
+
     @Override
-    public List<Disease> getAllDiseasesByUsername(String username) {
+    public List<Disease> getDiseases(String username) {
         return jdbcTemplate.query(SELECT_ALL_DISEASES, new DiseaseRowMapper(), username);
+    }
+
+    @Override
+    public Optional<Disease> getDisease(Long id, String username) {
+        List<Disease> diseases = jdbcTemplate.query(SELECT_DISEASE, new DiseaseRowMapper(), username, id);
+        if (diseases.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(diseases.get(0));
     }
 
     private static class DiseaseRowMapper implements RowMapper<Disease> {

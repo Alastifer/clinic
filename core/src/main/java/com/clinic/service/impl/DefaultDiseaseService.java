@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultDiseaseService implements DiseaseService {
@@ -19,6 +20,20 @@ public class DefaultDiseaseService implements DiseaseService {
             throw new IllegalArgumentException();
         }
 
-        return diseaseDAO.getAllDiseasesByUsername(username);
+        return diseaseDAO.getDiseases(username);
+    }
+
+    @Override
+    public Disease getDisease(Long id, String username) throws IllegalArgumentException {
+        if (id == null || username == null) {
+            throw new IllegalArgumentException();
+        }
+
+        Optional<Disease> disease = diseaseDAO.getDisease(id, username);
+        if (disease.isPresent()) {
+            return disease.get();
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DiseaseFacade {
     List<DiseaseModel> getDiseases(String username);
+    DiseaseModel getDisease(Long id, String username);
 }

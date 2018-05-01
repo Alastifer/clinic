@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,8 +22,11 @@ public class DefaultPatientDAO implements PatientDAO {
 
     @Override
     public Optional<Patient> getPatient(String username) {
-        Patient patient = jdbcTemplate.queryForObject(SELECT_PATIENT_BY_USERNAME, new PatientRowMapper(), username);
-        return Optional.of(patient);
+        List<Patient> patients = jdbcTemplate.query(SELECT_PATIENT_BY_USERNAME, new PatientRowMapper(), username);
+        if (patients.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(patients.get(0));
     }
 
     private static class PatientRowMapper implements RowMapper<Patient> {

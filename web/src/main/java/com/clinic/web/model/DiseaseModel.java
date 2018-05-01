@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class DiseaseModel {
     private Long id;
-    private String username;
+    private PatientModel patient;
     private Timestamp beginDate;
     private Timestamp endDate;
     private String type;
@@ -18,12 +18,12 @@ public class DiseaseModel {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public PatientModel getPatient() {
+        return patient;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPatient(PatientModel patient) {
+        this.patient = patient;
     }
 
     public Timestamp getBeginDate() {
