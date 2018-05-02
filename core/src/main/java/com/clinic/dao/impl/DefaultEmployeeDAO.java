@@ -17,8 +17,8 @@ public class DefaultEmployeeDAO implements EmployeeDAO {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    private static final String SELECT_EMPLOYEE_BY_USERNAME = "SELECT username, first_name, last_name, positions.name AS position" +
-                                                              "FROM patients JOIN positions ON patients.id_position = position.id " +
+    private static final String SELECT_EMPLOYEE_BY_USERNAME = "SELECT username, first_name, last_name, positions.name AS position " +
+                                                              "FROM employees JOIN positions ON employees.id_position = positions.id " +
                                                               "WHERE username = ?";
     @Override
     public Optional<Employee> getEmployee(String username) {

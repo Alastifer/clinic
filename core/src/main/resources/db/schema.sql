@@ -88,10 +88,10 @@ CREATE TABLE analyzes (
 CREATE TABLE tickets (
   id BIGINT AUTO_INCREMENT,
   receipt_date DATETIME NOT NULL,
-  room_number BIGINT NOT NULL,
-  id_employee VARCHAR(30) NOT NULL,
-  username VARCHAR(30) NOT NULL,
+  room BIGINT NOT NULL,
+  employee VARCHAR(30) NOT NULL,
+  patient VARCHAR(30),
   PRIMARY KEY (id),
-  FOREIGN KEY (username) REFERENCES patients(username),
-  FOREIGN KEY (id_employee) REFERENCES employees(username)
+  FOREIGN KEY (patient) REFERENCES patients(username),
+  FOREIGN KEY (employee) REFERENCES employees(username)
 );
