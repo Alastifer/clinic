@@ -35,6 +35,11 @@ public class DefaultTicketFacade implements TicketFacade {
         return ticketModels;
     }
 
+    @Override
+    public void cancelTicket(Long id) {
+        ticketService.cancelTicket(id);
+    }
+
     private TicketModel createModel(Ticket ticket) {
         TicketModel ticketModel = new TicketModel();
         ticketModel.setId(ticket.getId());

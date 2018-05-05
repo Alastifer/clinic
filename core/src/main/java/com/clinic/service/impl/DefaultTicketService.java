@@ -21,4 +21,13 @@ public class DefaultTicketService implements TicketService {
 
         return ticketDAO.getTickets(username);
     }
+
+    @Override
+    public void cancelTicket(Long id) throws IllegalArgumentException {
+        if (id == null) {
+            throw new IllegalArgumentException();
+        }
+
+        ticketDAO.cancelTicket(id);
+    }
 }

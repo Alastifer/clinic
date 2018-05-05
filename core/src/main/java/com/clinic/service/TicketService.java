@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TicketService {
     List<Ticket> getTickets(String username) throws IllegalArgumentException;
+    void cancelTicket(Long id) throws IllegalArgumentException;
 }

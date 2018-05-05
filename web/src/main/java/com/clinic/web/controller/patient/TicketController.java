@@ -30,6 +30,7 @@ public class TicketController {
 
     @PostMapping(value = "/patient/tickets", params = "ticketForCancel")
     public String cancelTicket(@RequestParam Long ticketForCancel) {
-        return null;
+        ticketFacade.cancelTicket(ticketForCancel);
+        return "redirect:/patient/tickets";
     }
 }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TicketFacade {
     List<TicketModel> getTickets(String username);
+    void cancelTicket(Long id);
 }

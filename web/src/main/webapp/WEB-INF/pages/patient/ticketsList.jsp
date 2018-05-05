@@ -69,7 +69,7 @@
                                 <td class="cell100 column3">${ticket.room}</td>
                                 <td class="cell100 column4">${ticket.employee.firstName} ${ticket.employee.lastName} (${ticket.employee.position})</td>
                                 <td class="cell100 column5">
-                                    <form action="" method="POST">
+                                    <form action="${pageContext.request.contextPath}/patient/tickets" method="POST">
                                         <button class="btn btn-primary" type="submit" name="ticketForCancel" value="${ticket.id}">Отменить</button>
                                     </form>
                                 </td>
