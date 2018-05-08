@@ -5,5 +5,5 @@ import com.clinic.model.Employee;
 import java.util.Optional;
 
 public interface EmployeeDAO {
-    Optional<Employee> getEmployee(String username);
+    Optional<Employee> getEmployeeByUsername(String username);
 }

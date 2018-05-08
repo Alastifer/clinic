@@ -20,8 +20,8 @@ public class DefaultAnalyzeFacade implements AnalyzeFacade {
     private PatientFacade patientFacade;
 
     @Override
-    public List<AnalyzeModel> getAnalyzes(String username) {
-        List<Analyze> analyzes = analyzeService.getAnalyzes(username);
+    public List<AnalyzeModel> getAllAnalyzesByUsername(String username) {
+        List<Analyze> analyzes = analyzeService.getAllAnalyzesByUsername(username);
         List<AnalyzeModel> analyzeModels = new ArrayList<>();
         analyzes.forEach(analyze ->{
             AnalyzeModel analyzeModel = createModel(analyze);
@@ -32,15 +32,15 @@ public class DefaultAnalyzeFacade implements AnalyzeFacade {
     }
 
     @Override
-    public AnalyzeModel getAnalyze(Long id, String username) {
-        Analyze analyze = analyzeService.getAnalyze(id, username);
+    public AnalyzeModel getAnalyzeByIdAndUsername(Long id, String username) {
+        Analyze analyze = analyzeService.getAnalyzeByIdAndUsername(id, username);
         return createModel(analyze);
     }
 
     private AnalyzeModel createModel(Analyze analyze) {
         AnalyzeModel analyzeModel = new AnalyzeModel();
         analyzeModel.setId(analyze.getId());
-        analyzeModel.setPatient(patientFacade.getPatient(analyze.getUsername()));
+        analyzeModel.setPatient(patientFacade.getPatientByUsername(analyze.getUsername()));
         analyzeModel.setReceivingDate(analyze.getReceivingDate());
         analyzeModel.setType(analyze.getType());
         analyzeModel.setContent(analyze.getContent());

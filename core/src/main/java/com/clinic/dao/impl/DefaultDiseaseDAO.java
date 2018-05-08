@@ -30,12 +30,12 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
                                                                     "WHERE username = ? AND diseases.id = ?";
 
     @Override
-    public List<Disease> getDiseases(String username) {
+    public List<Disease> getAllDiseasesByUsername(String username) {
         return jdbcTemplate.query(SELECT_ALL_DISEASES_BY_USERNAME, new DiseaseRowMapper(), username);
     }
 
     @Override
-    public Optional<Disease> getDisease(Long id, String username) {
+    public Optional<Disease> getDiseaseByIdAndUsername(Long id, String username) {
         List<Disease> diseases = jdbcTemplate.query(SELECT_DISEASE_BY_USERNAME_AND_ID, new DiseaseRowMapper(), username, id);
         if (diseases.isEmpty()) {
             return Optional.empty();

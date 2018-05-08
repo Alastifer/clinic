@@ -5,6 +5,6 @@ import com.clinic.web.model.DiseaseModel;
 import java.util.List;
 
 public interface DiseaseFacade {
-    List<DiseaseModel> getDiseases(String username);
-    DiseaseModel getDisease(Long id, String username);
+    List<DiseaseModel> getAllDiseasesByUsername(String username);
+    DiseaseModel getDiseaseByIdAndUsername(Long id, String username);
 }

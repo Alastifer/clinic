@@ -22,7 +22,7 @@ public class EmployeeController {
     @GetMapping("/employee")
     public String getEmployee(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_EMPLOYEE, employeeFacade.getEmployee(username));
+        model.addAttribute(ATTRIBUTE_EMPLOYEE, employeeFacade.getEmployeeByUsername(username));
         return "employee/employee";
     }
 }

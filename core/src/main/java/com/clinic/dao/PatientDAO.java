@@ -5,5 +5,5 @@ import com.clinic.model.Patient;
 import java.util.Optional;
 
 public interface PatientDAO {
-    Optional<Patient> getPatient(String username);
+    Optional<Patient> getPatientByUsername(String username);
 }

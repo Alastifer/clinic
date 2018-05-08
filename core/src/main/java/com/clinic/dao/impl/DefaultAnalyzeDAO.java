@@ -30,12 +30,12 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
                                                                     "WHERE username = ? AND analyzes.id = ?";
 
     @Override
-    public List<Analyze> getAnalyzes(String username) {
+    public List<Analyze> getAllAnalyzesByUsername(String username) {
         return jdbcTemplate.query(SELECT_ALL_ANALYZES_BY_USERNAME, new AnalyzeRowMapper(), username);
     }
 
     @Override
-    public Optional<Analyze> getAnalyze(Long id, String username) {
+    public Optional<Analyze> getAnalyzeByIdAndUsername(Long id, String username) {
         List<Analyze> analyzes = jdbcTemplate.query(SELECT_ANALYZE_BY_USERNAME_AND_ID, new AnalyzeRowMapper(), username, id);
         if (analyzes.isEmpty()) {
             return Optional.empty();

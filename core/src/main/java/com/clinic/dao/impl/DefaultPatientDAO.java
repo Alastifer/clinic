@@ -21,7 +21,7 @@ public class DefaultPatientDAO implements PatientDAO {
                                                        "phone_number FROM patients WHERE username = ?";
 
     @Override
-    public Optional<Patient> getPatient(String username) {
+    public Optional<Patient> getPatientByUsername(String username) {
         List<Patient> patients = jdbcTemplate.query(SELECT_PATIENT_BY_USERNAME, new PatientRowMapper(), username);
         if (patients.isEmpty()) {
             return Optional.empty();

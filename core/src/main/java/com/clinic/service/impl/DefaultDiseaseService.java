@@ -15,21 +15,21 @@ public class DefaultDiseaseService implements DiseaseService {
     private DiseaseDAO diseaseDAO;
 
     @Override
-    public List<Disease> getDiseases(String username) throws IllegalArgumentException {
+    public List<Disease> getAllDiseasesByUsername(String username) throws IllegalArgumentException {
         if (username == null) {
             throw new IllegalArgumentException();
         }
 
-        return diseaseDAO.getDiseases(username);
+        return diseaseDAO.getAllDiseasesByUsername(username);
     }
 
     @Override
-    public Disease getDisease(Long id, String username) throws IllegalArgumentException {
+    public Disease getDiseaseByIdAndUsername(Long id, String username) throws IllegalArgumentException {
         if (id == null || username == null) {
             throw new IllegalArgumentException();
         }
 
-        Optional<Disease> disease = diseaseDAO.getDisease(id, username);
+        Optional<Disease> disease = diseaseDAO.getDiseaseByIdAndUsername(id, username);
         if (disease.isPresent()) {
             return disease.get();
         } else {

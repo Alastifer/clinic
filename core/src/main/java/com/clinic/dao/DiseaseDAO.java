@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DiseaseDAO {
-    List<Disease> getDiseases(String username);
-    Optional<Disease> getDisease(Long id, String username);
+    List<Disease> getAllDiseasesByUsername(String username);
+    Optional<Disease> getDiseaseByIdAndUsername(Long id, String username);
 }

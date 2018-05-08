@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AnalyzeDAO {
-    List<Analyze> getAnalyzes(String username);
-    Optional<Analyze> getAnalyze(Long id, String username);
+    List<Analyze> getAllAnalyzesByUsername(String username);
+    Optional<Analyze> getAnalyzeByIdAndUsername(Long id, String username);
 }

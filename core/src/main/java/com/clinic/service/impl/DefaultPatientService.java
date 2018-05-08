@@ -14,12 +14,12 @@ public class DefaultPatientService implements PatientService {
     private PatientDAO patientDAO;
 
     @Override
-    public Patient getPatient(String username) throws IllegalArgumentException {
+    public Patient getPatientByUsername(String username) throws IllegalArgumentException {
         if (username == null) {
             throw new IllegalArgumentException();
         }
 
-        Optional<Patient> patient = patientDAO.getPatient(username);
+        Optional<Patient> patient = patientDAO.getPatientByUsername(username);
         if (patient.isPresent()) {
             return patient.get();
         } else {

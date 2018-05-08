@@ -24,14 +24,14 @@ public class AnalyzeController {
     @GetMapping("/patient/analyzes")
     public String getAnalyzes(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_ANALYZES, analyzeFacade.getAnalyzes(username));
+        model.addAttribute(ATTRIBUTE_ANALYZES, analyzeFacade.getAllAnalyzesByUsername(username));
         return "patient/analyzesList";
     }
 
     @GetMapping("/patient/analyzes/{id}")
     public String getAnalyze(@PathVariable Long id, Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_ANALYZE, analyzeFacade.getAnalyze(id, username));
+        model.addAttribute(ATTRIBUTE_ANALYZE, analyzeFacade.getAnalyzeByIdAndUsername(id, username));
         return "patient/analyze";
     }
 }

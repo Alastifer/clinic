@@ -24,14 +24,14 @@ public class DiseaseController {
     @GetMapping("/patient/diseases")
     public String getDiseases(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_DISEASES, diseaseFacade.getDiseases(username));
+        model.addAttribute(ATTRIBUTE_DISEASES, diseaseFacade.getAllDiseasesByUsername(username));
         return "patient/diseasesList";
     }
 
     @GetMapping("/patient/diseases/{id}")
     public String getDisease(@PathVariable Long id, Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_DISEASE, diseaseFacade.getDisease(id, username));
+        model.addAttribute(ATTRIBUTE_DISEASE, diseaseFacade.getDiseaseByIdAndUsername(id, username));
         return "patient/disease";
     }
 }

@@ -14,8 +14,8 @@ public class DefaultEmployeeFacade implements EmployeeFacade {
     private EmployeeService employeeService;
 
     @Override
-    public EmployeeModel getEmployee(String username) {
-        Employee employee = employeeService.getEmployee(username);
+    public EmployeeModel getEmployeeByUsername(String username) {
+        Employee employee = employeeService.getEmployeeByUsername(username);
         EmployeeModel employeeModel = new EmployeeModel();
 
         employeeModel.setUsername(employee.getUsername());

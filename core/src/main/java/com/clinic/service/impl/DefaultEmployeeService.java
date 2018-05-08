@@ -14,12 +14,12 @@ public class DefaultEmployeeService implements EmployeeService {
     private EmployeeDAO employeeDAO;
 
     @Override
-    public Employee getEmployee(String username) throws IllegalArgumentException {
+    public Employee getEmployeeByUsername(String username) throws IllegalArgumentException {
         if (username == null) {
             throw new IllegalArgumentException();
         }
 
-        Optional<Employee> employee = employeeDAO.getEmployee(username);
+        Optional<Employee> employee = employeeDAO.getEmployeeByUsername(username);
         if (employee.isPresent()) {
             return employee.get();
         } else {

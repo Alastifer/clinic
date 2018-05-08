@@ -15,21 +15,21 @@ public class DefaultAnalyzeService implements AnalyzeService {
     private AnalyzeDAO analyzeDAO;
 
     @Override
-    public List<Analyze> getAnalyzes(String username) throws IllegalArgumentException {
+    public List<Analyze> getAllAnalyzesByUsername(String username) throws IllegalArgumentException {
         if (username == null) {
             throw new IllegalArgumentException();
         }
 
-        return analyzeDAO.getAnalyzes(username);
+        return analyzeDAO.getAllAnalyzesByUsername(username);
     }
 
     @Override
-    public Analyze getAnalyze(Long id, String username) throws IllegalArgumentException {
+    public Analyze getAnalyzeByIdAndUsername(Long id, String username) throws IllegalArgumentException {
         if (id == null || username == null) {
             throw new IllegalArgumentException();
         }
 
-        Optional<Analyze> analyze = analyzeDAO.getAnalyze(id, username);
+        Optional<Analyze> analyze = analyzeDAO.getAnalyzeByIdAndUsername(id, username);
         if (analyze.isPresent()) {
             return analyze.get();
         } else {

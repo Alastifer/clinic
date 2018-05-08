@@ -14,8 +14,8 @@ public class DefaultPatientFacade implements PatientFacade {
     private PatientService patientService;
 
     @Override
-    public PatientModel getPatient(String username) {
-        Patient patient = patientService.getPatient(username);
+    public PatientModel getPatientByUsername(String username) {
+        Patient patient = patientService.getPatientByUsername(username);
         PatientModel patientModel = new PatientModel();
 
         patientModel.setUsername(patient.getUsername());

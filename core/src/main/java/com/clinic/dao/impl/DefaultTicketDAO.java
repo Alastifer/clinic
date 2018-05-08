@@ -19,16 +19,17 @@ public class DefaultTicketDAO implements TicketDAO {
     private static final String SELECT_TICKETS_BY_USERNAME = "SELECT id, receipt_date, room, employee, patient " +
                                                              "FROM tickets WHERE patient = ?";
 
-    private static final String UPDATE_SET_NULL_FOR_PATIENT = "UPDATE tickets SET patient = NULL WHERE id = ?";
+    private static final String UPDATE_SET_NULL_FOR_PATIENT_BY_ID_AND_USERNAME = "UPDATE tickets SET patient = NULL " +
+                                                                                 "WHERE id = ? AND patient = ?";
 
     @Override
-    public List<Ticket> getTickets(String username) {
+    public List<Ticket> getAllTicketsByUsername(String username) {
         return jdbcTemplate.query(SELECT_TICKETS_BY_USERNAME, new TicketRowMapper(), username);
     }
 
     @Override
-    public void cancelTicket(Long id) {
-        jdbcTemplate.update(UPDATE_SET_NULL_FOR_PATIENT, id);
+    public void cancelTicketByIdAndUsername(Long id, String username) {
+        jdbcTemplate.update(UPDATE_SET_NULL_FOR_PATIENT_BY_ID_AND_USERNAME, id, username);
     }
 
     private static class TicketRowMapper implements RowMapper<Ticket> {

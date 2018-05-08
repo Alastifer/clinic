@@ -24,7 +24,7 @@ public class DefaultTicketFacade implements TicketFacade {
     private PatientFacade patientFacade;
 
     @Override
-    public List<TicketModel> getTickets(String username) {
+    public List<TicketModel> getAllTicketsByUsername(String username) {
         List<Ticket> tickets = ticketService.getTickets(username);
         List<TicketModel> ticketModels = new ArrayList<>();
         tickets.forEach(ticket -> {
@@ -36,8 +36,8 @@ public class DefaultTicketFacade implements TicketFacade {
     }
 
     @Override
-    public void cancelTicket(Long id) {
-        ticketService.cancelTicket(id);
+    public void cancelTicketByIdAndUsername(Long id, String username) {
+        ticketService.cancelTicket(id, username);
     }
 
     private TicketModel createModel(Ticket ticket) {
@@ -45,8 +45,8 @@ public class DefaultTicketFacade implements TicketFacade {
         ticketModel.setId(ticket.getId());
         ticketModel.setReceiptDate(ticket.getReceiptDate());
         ticketModel.setRoom(ticket.getRoom());
-        ticketModel.setPatient(patientFacade.getPatient(ticket.getPatientUsername()));
-        ticketModel.setEmployee(employeeFacade.getEmployee(ticket.getEmployeeUsername()));
+        ticketModel.setPatient(patientFacade.getPatientByUsername(ticket.getPatientUsername()));
+        ticketModel.setEmployee(employeeFacade.getEmployeeByUsername(ticket.getEmployeeUsername()));
         return ticketModel;
     }
 }

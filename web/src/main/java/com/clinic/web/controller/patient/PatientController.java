@@ -22,7 +22,7 @@ public class PatientController {
     @GetMapping("/patient")
     public String getUserPage(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_PATIENT, patientFacade.getPatient(username));
+        model.addAttribute(ATTRIBUTE_PATIENT, patientFacade.getPatientByUsername(username));
         return "patient/patient";
     }
 }

@@ -21,7 +21,7 @@ public class DefaultEmployeeDAO implements EmployeeDAO {
                                                               "FROM employees JOIN positions ON employees.id_position = positions.id " +
                                                               "WHERE username = ?";
     @Override
-    public Optional<Employee> getEmployee(String username) {
+    public Optional<Employee> getEmployeeByUsername(String username) {
         List<Employee> employees = jdbcTemplate.query(SELECT_EMPLOYEE_BY_USERNAME, new EmployeeRowMapper(), username);
         if (employees.isEmpty()) {
             return Optional.empty();

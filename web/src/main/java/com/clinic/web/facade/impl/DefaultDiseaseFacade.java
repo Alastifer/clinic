@@ -20,8 +20,8 @@ public class DefaultDiseaseFacade implements DiseaseFacade {
     private PatientFacade patientFacade;
 
     @Override
-    public List<DiseaseModel> getDiseases(String username) {
-        List<Disease> diseases = diseaseService.getDiseases(username);
+    public List<DiseaseModel> getAllDiseasesByUsername(String username) {
+        List<Disease> diseases = diseaseService.getAllDiseasesByUsername(username);
         List<DiseaseModel> diseaseModels = new ArrayList<>();
         diseases.forEach(disease -> {
             DiseaseModel diseaseModel = createModel(disease);
@@ -32,15 +32,15 @@ public class DefaultDiseaseFacade implements DiseaseFacade {
     }
 
     @Override
-    public DiseaseModel getDisease(Long id, String username) {
-        Disease disease = diseaseService.getDisease(id, username);
+    public DiseaseModel getDiseaseByIdAndUsername(Long id, String username) {
+        Disease disease = diseaseService.getDiseaseByIdAndUsername(id, username);
         return createModel(disease);
     }
 
     private DiseaseModel createModel(Disease disease) {
         DiseaseModel diseaseModel = new DiseaseModel();
         diseaseModel.setId(disease.getId());
-        diseaseModel.setPatient(patientFacade.getPatient(disease.getUsername()));
+        diseaseModel.setPatient(patientFacade.getPatientByUsername(disease.getUsername()));
         diseaseModel.setBeginDate(disease.getBeginDate());
         diseaseModel.setEndDate(disease.getEndDate());
         diseaseModel.setType(disease.getType());

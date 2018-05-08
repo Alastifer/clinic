@@ -24,13 +24,14 @@ public class TicketController {
     @GetMapping("/patient/tickets")
     public String getTickets(Model model) {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
-        model.addAttribute(ATTRIBUTE_TICKETS, ticketFacade.getTickets(username));
+        model.addAttribute(ATTRIBUTE_TICKETS, ticketFacade.getAllTicketsByUsername(username));
         return "/patient/ticketsList";
     }
 
     @PostMapping(value = "/patient/tickets", params = "ticketForCancel")
     public String cancelTicket(@RequestParam Long ticketForCancel) {
-        ticketFacade.cancelTicket(ticketForCancel);
+        final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
+        ticketFacade.cancelTicketByIdAndUsername(ticketForCancel, username);
         return "redirect:/patient/tickets";
     }
 }

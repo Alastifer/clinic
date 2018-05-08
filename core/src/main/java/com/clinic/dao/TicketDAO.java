@@ -5,6 +5,6 @@ import com.clinic.model.Ticket;
 import java.util.List;
 
 public interface TicketDAO {
-    List<Ticket> getTickets(String username);
-    void cancelTicket(Long id);
+    List<Ticket> getAllTicketsByUsername(String username);
+    void cancelTicketByIdAndUsername(Long id, String username);
 }
