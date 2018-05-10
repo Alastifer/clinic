@@ -34,4 +34,17 @@ public class TicketController {
         ticketFacade.cancelTicketByIdAndUsername(ticketForCancel, username);
         return "redirect:/patient/tickets";
     }
+
+    @GetMapping("/patient/tickets/order")
+    public String getTicketsForOrder(Model model) {
+        model.addAttribute(ATTRIBUTE_TICKETS, ticketFacade.getTicketsForOrder());
+        return "/patient/ticketsListOrder";
+    }
+
+    @PostMapping(value = "/patient/tickets/order", params = "ticketForOrder")
+    public String orderTicket(@RequestParam Long ticketForOrder) {
+        final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
+        ticketFacade.orderTicketByIdAndUsername(ticketForOrder, username);
+        return "redirect:/patient/tickets";
+    }
 }

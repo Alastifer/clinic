@@ -14,7 +14,7 @@ public class DefaultTicketService implements TicketService {
     private TicketDAO ticketDAO;
 
     @Override
-    public List<Ticket> getTickets(String username) throws IllegalArgumentException {
+    public List<Ticket> getAllTicketsByUsername(String username) throws IllegalArgumentException {
         if (username == null) {
             throw new IllegalArgumentException();
         }
@@ -23,11 +23,25 @@ public class DefaultTicketService implements TicketService {
     }
 
     @Override
-    public void cancelTicket(Long id, String username) throws IllegalArgumentException {
+    public void cancelTicketByIdAndUsername(Long id, String username) throws IllegalArgumentException {
         if (id == null || username == null) {
             throw new IllegalArgumentException();
         }
 
         ticketDAO.cancelTicketByIdAndUsername(id, username);
+    }
+
+    @Override
+    public List<Ticket> getTicketsForOrder() {
+        return ticketDAO.getTicketsForOrder();
+    }
+
+    @Override
+    public void orderTicketByIdAndUsername(Long id, String username) throws IllegalArgumentException {
+        if (id == null || username == null) {
+            throw new IllegalArgumentException();
+        }
+
+        ticketDAO.orderTicketByIdAndUsername(id, username);
     }
 }

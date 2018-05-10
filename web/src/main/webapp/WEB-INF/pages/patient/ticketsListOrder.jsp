@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Заказанные талоны</title>
+    <title>Заказать талон</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="<c:url value="/resources/img/hospital.ico"/>"/>
@@ -39,8 +39,7 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
     </div>
     <div class="row float-l">
-        <a href="${pageContext.request.contextPath}/patient" class="btn btn-primary m-t-10 m-r-5">Профиль</a>
-        <a href="${pageContext.request.contextPath}/patient/tickets/order" class="btn btn-primary m-t-10">Заказать талон</a>
+        <a href="${pageContext.request.contextPath}/patient" class="btn btn-primary m-t-10">Профиль</a>
     </div>
     <div class="container-table100">
         <div class="wrap-table100">
@@ -53,7 +52,7 @@
                             <th class="cell100 column2">Дата приема</th>
                             <th class="cell100 column3">Номер кабинета</th>
                             <th class="cell100 column4">Врач</th>
-                            <th class="cell100 column5">Отменить</th>
+                            <th class="cell100 column5">Заказать</th>
                         </tr>
                         </thead>
                     </table>
@@ -70,8 +69,8 @@
                                 <td class="cell100 column3">${ticket.room}</td>
                                 <td class="cell100 column4">${ticket.employee.firstName} ${ticket.employee.lastName} (${ticket.employee.position})</td>
                                 <td class="cell100 column5">
-                                    <form action="${pageContext.request.contextPath}/patient/tickets" method="POST">
-                                        <button class="btn btn-primary" type="submit" name="ticketForCancel" value="${ticket.id}">Отменить</button>
+                                    <form action="${pageContext.request.contextPath}/patient/tickets/order" method="POST">
+                                        <button class="btn btn-primary" type="submit" name="ticketForOrder" value="${ticket.id}">Заказать</button>
                                     </form>
                                 </td>
                             </tr>

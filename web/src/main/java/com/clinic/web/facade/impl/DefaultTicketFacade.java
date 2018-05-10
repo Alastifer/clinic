@@ -25,19 +25,24 @@ public class DefaultTicketFacade implements TicketFacade {
 
     @Override
     public List<TicketModel> getAllTicketsByUsername(String username) {
-        List<Ticket> tickets = ticketService.getTickets(username);
-        List<TicketModel> ticketModels = new ArrayList<>();
-        tickets.forEach(ticket -> {
-            TicketModel ticketModel = createModel(ticket);
-            ticketModels.add(ticketModel);
-        });
-
-        return ticketModels;
+        List<Ticket> tickets = ticketService.getAllTicketsByUsername(username);
+        return createList(tickets);
     }
 
     @Override
     public void cancelTicketByIdAndUsername(Long id, String username) {
-        ticketService.cancelTicket(id, username);
+        ticketService.cancelTicketByIdAndUsername(id, username);
+    }
+
+    @Override
+    public List<TicketModel> getTicketsForOrder() {
+        List<Ticket> tickets = ticketService.getTicketsForOrder();
+        return createList(tickets);
+    }
+
+    @Override
+    public void orderTicketByIdAndUsername(Long id, String username) {
+        ticketService.orderTicketByIdAndUsername(id, username);
     }
 
     private TicketModel createModel(Ticket ticket) {
@@ -45,8 +50,22 @@ public class DefaultTicketFacade implements TicketFacade {
         ticketModel.setId(ticket.getId());
         ticketModel.setReceiptDate(ticket.getReceiptDate());
         ticketModel.setRoom(ticket.getRoom());
-        ticketModel.setPatient(patientFacade.getPatientByUsername(ticket.getPatientUsername()));
         ticketModel.setEmployee(employeeFacade.getEmployeeByUsername(ticket.getEmployeeUsername()));
+        if (ticket.getPatientUsername() == null) {
+            ticketModel.setPatient(null);
+        } else {
+            ticketModel.setPatient(patientFacade.getPatientByUsername(ticket.getPatientUsername()));
+        }
+
         return ticketModel;
+    }
+
+    private List<TicketModel> createList(List<Ticket> tickets) {
+        List<TicketModel> ticketModels = new ArrayList<>();
+        tickets.forEach(ticket -> {
+            TicketModel ticketModel = createModel(ticket);
+            ticketModels.add(ticketModel);
+        });
+        return ticketModels;
     }
 }

@@ -22,3 +22,5 @@ INSERT INTO employees (username, first_name, last_name, id_position) VALUES ('em
 
 INSERT INTO tickets (id, receipt_date, room, employee, patient) VALUES (1, '2012-03-02', 108, 'employee', '123');
 INSERT INTO tickets (id, receipt_date, room, employee, patient) VALUES (2, '2012-03-12', 108, 'employee', '123');
+INSERT INTO tickets (id, receipt_date, room, employee, patient) VALUES (3, '2013-04-02', 108, 'employee', NULL);
+INSERT INTO tickets (id, receipt_date, room, employee, patient) VALUES (4, '2013-01-22', 108, 'employee', NULL);
