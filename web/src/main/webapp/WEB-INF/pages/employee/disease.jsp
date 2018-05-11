@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Пациент #${patient.username}</title>
+    <title>История болезни #${disease.id}</title>
     <link rel="icon" type="image/png" href="<c:url value="/resources/img/hospital.ico"/>"/>
     <link href="<c:url value="/resources/css/login.css"/>" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -20,8 +20,8 @@
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Пациент #${patient.username}</h3>
-                    <a href="${pageContext.request.contextPath}/employee/patients">К таблице</a>
+                    <h3 class="panel-title">История болезни #${disease.id}</h3>
+                    <a href="${pageContext.request.contextPath}/employee/patients/${disease.patient.username}/diseases">К таблице</a>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -29,31 +29,29 @@
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
-                                    <td>Имя</td>
-                                    <td>${patient.firstName}</td>
+                                    <td>Пациент</td>
+                                    <td>${disease.patient.firstName} ${disease.patient.lastName} #${disease.patient.username}</td>
                                 </tr>
                                 <tr>
-                                    <td>Фамилия</td>
-                                    <td>${patient.lastName}</td>
-                                </tr>
-                                <tr>
-                                    <td>Адрес</td>
-                                    <td>${patient.address}</td>
-                                </tr>
-                                <tr>
-                                    <td>Дата рождения</td>
+                                    <td>Дата начала</td>
                                     <td>
-                                        <fmt:formatDate value="${patient.birthDay}" pattern="dd-MM-yyyy"/>
+                                        <fmt:formatDate value="${disease.beginDate}" pattern="dd-MM-yyyy HH:mm"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Номер телефона</td>
-                                    <td>${patient.phoneNumber}</td>
+                                    <td>Дата окончания</td>
+                                    <td>
+                                        <fmt:formatDate value="${disease.endDate}" pattern="dd-MM-yyyy HH:mm"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Диагноз</td>
+                                    <td>${disease.type}</td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="${pageContext.request.contextPath}/employee/patients/${patient.username}/diseases" class="btn btn-primary">Истории болезней</a>
-                            <a href="" class="btn btn-primary">Анализы</a>
+                            <p>Содержание</p>
+                            <p>${disease.content}</p>
                         </div>
                     </div>
                 </div>
