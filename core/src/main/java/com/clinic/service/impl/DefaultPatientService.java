@@ -8,6 +8,7 @@ import com.clinic.service.PatientService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class DefaultPatientService implements PatientService {
@@ -25,5 +26,10 @@ public class DefaultPatientService implements PatientService {
         } catch (AmbiguousIdentifierException | UnknownIdentifierException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public List<Patient> getAllPatients() {
+        return patientDAO.getAllPatients();
     }
 }

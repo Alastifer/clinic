@@ -21,6 +21,9 @@ public class DefaultPatientDAO implements PatientDAO {
     private static final String SELECT_PATIENT_BY_USERNAME = "SELECT username, first_name, last_name, address, birth_day, " +
                                                              "phone_number FROM patients WHERE username = ?";
 
+    private static final String SELECT_ALL_PATIENTS = "SELECT username, first_name, last_name, address, birth_day, " +
+                                                      "phone_number FROM patients";
+
     @Override
     public Patient getPatientByUsername(String username) {
         List<Patient> patients = jdbcTemplate.query(SELECT_PATIENT_BY_USERNAME, new PatientRowMapper(), username);
@@ -30,6 +33,11 @@ public class DefaultPatientDAO implements PatientDAO {
             throw new AmbiguousIdentifierException("Patient with username '" + username + "' is not unique, " + patients.size() + " patients found!");
         }
         return patients.get(0);
+    }
+
+    @Override
+    public List<Patient> getAllPatients() {
+        return jdbcTemplate.query(SELECT_ALL_PATIENTS, new PatientRowMapper());
     }
 
     private static class PatientRowMapper implements RowMapper<Patient> {
