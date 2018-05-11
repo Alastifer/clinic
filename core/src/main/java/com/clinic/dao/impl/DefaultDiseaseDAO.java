@@ -1,6 +1,8 @@
 package com.clinic.dao.impl;
 
 import com.clinic.dao.DiseaseDAO;
+import com.clinic.dao.exception.AmbiguousIdentifierException;
+import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Disease;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -35,12 +37,14 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
     }
 
     @Override
-    public Optional<Disease> getDiseaseByIdAndUsername(Long id, String username) {
+    public Disease getDiseaseByIdAndUsername(Long id, String username) {
         List<Disease> diseases = jdbcTemplate.query(SELECT_DISEASE_BY_USERNAME_AND_ID, new DiseaseRowMapper(), username, id);
         if (diseases.isEmpty()) {
-            return Optional.empty();
+            throw new UnknownIdentifierException("Disease with id '" + id + "' and username '" + username + "' not found!");
+        } else if (diseases.size() > 1) {
+            throw new AmbiguousIdentifierException("Disease with id '" + id + "' and username '" + username + "' is not unique, " + diseases.size() + " diseases found!");
         }
-        return Optional.of(diseases.get(0));
+        return diseases.get(0);
     }
 
     private static class DiseaseRowMapper implements RowMapper<Disease> {

@@ -39,7 +39,8 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
     </div>
     <div class="row float-l">
-        <a href="${pageContext.request.contextPath}/patient" class="btn btn-primary m-t-10">Профиль</a>
+        <a href="${pageContext.request.contextPath}/patient" class="btn btn-primary m-t-10 m-r-5">Профиль</a>
+        <a href="${pageContext.request.contextPath}/patient/tickets" class="btn btn-primary m-t-10">Назад</a>
     </div>
     <div class="container-table100">
         <div class="wrap-table100">

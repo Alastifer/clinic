@@ -1,13 +1,14 @@
 package com.clinic.service.impl;
 
 import com.clinic.dao.AnalyzeDAO;
+import com.clinic.dao.exception.AmbiguousIdentifierException;
+import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Analyze;
 import com.clinic.service.AnalyzeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DefaultAnalyzeService implements AnalyzeService {
@@ -15,25 +16,26 @@ public class DefaultAnalyzeService implements AnalyzeService {
     private AnalyzeDAO analyzeDAO;
 
     @Override
-    public List<Analyze> getAllAnalyzesByUsername(String username) throws IllegalArgumentException {
+    public List<Analyze> getAllAnalyzesByUsername(String username) {
         if (username == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Username must not be null");
         }
 
         return analyzeDAO.getAllAnalyzesByUsername(username);
     }
 
     @Override
-    public Analyze getAnalyzeByIdAndUsername(Long id, String username) throws IllegalArgumentException {
-        if (id == null || username == null) {
-            throw new IllegalArgumentException();
+    public Analyze getAnalyzeByIdAndUsername(Long id, String username) {
+        if (username == null) {
+            throw new IllegalArgumentException("Username must not be null");
+        } else if (id == null) {
+            throw new IllegalArgumentException("Id must not be null");
         }
 
-        Optional<Analyze> analyze = analyzeDAO.getAnalyzeByIdAndUsername(id, username);
-        if (analyze.isPresent()) {
-            return analyze.get();
-        } else {
-            throw new IllegalArgumentException();
+        try {
+            return analyzeDAO.getAnalyzeByIdAndUsername(id, username);
+        } catch (AmbiguousIdentifierException | UnknownIdentifierException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.clinic.service.impl;
 
 import com.clinic.dao.DiseaseDAO;
+import com.clinic.dao.exception.AmbiguousIdentifierException;
+import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Disease;
 import com.clinic.service.DiseaseService;
 import org.springframework.stereotype.Service;
@@ -15,25 +17,26 @@ public class DefaultDiseaseService implements DiseaseService {
     private DiseaseDAO diseaseDAO;
 
     @Override
-    public List<Disease> getAllDiseasesByUsername(String username) throws IllegalArgumentException {
+    public List<Disease> getAllDiseasesByUsername(String username) {
         if (username == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Username must not be null");
         }
 
         return diseaseDAO.getAllDiseasesByUsername(username);
     }
 
     @Override
-    public Disease getDiseaseByIdAndUsername(Long id, String username) throws IllegalArgumentException {
-        if (id == null || username == null) {
-            throw new IllegalArgumentException();
+    public Disease getDiseaseByIdAndUsername(Long id, String username) {
+        if (username == null) {
+            throw new IllegalArgumentException("Username must not be null");
+        } else if (id == null) {
+            throw new IllegalArgumentException("Id must not be null");
         }
 
-        Optional<Disease> disease = diseaseDAO.getDiseaseByIdAndUsername(id, username);
-        if (disease.isPresent()) {
-            return disease.get();
-        } else {
-            throw new IllegalArgumentException();
+        try {
+            return diseaseDAO.getDiseaseByIdAndUsername(id, username);
+        } catch (AmbiguousIdentifierException | UnknownIdentifierException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
 }

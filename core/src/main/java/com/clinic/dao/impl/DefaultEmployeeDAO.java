@@ -1,6 +1,8 @@
 package com.clinic.dao.impl;
 
 import com.clinic.dao.EmployeeDAO;
+import com.clinic.dao.exception.AmbiguousIdentifierException;
+import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Employee;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -10,7 +12,6 @@ import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class DefaultEmployeeDAO implements EmployeeDAO {
@@ -21,12 +22,14 @@ public class DefaultEmployeeDAO implements EmployeeDAO {
                                                               "FROM employees JOIN positions ON employees.id_position = positions.id " +
                                                               "WHERE username = ?";
     @Override
-    public Optional<Employee> getEmployeeByUsername(String username) {
+    public Employee getEmployeeByUsername(String username) {
         List<Employee> employees = jdbcTemplate.query(SELECT_EMPLOYEE_BY_USERNAME, new EmployeeRowMapper(), username);
         if (employees.isEmpty()) {
-            return Optional.empty();
+            throw new UnknownIdentifierException("Employee with username '" + username + "' not found!");
+        } else if (employees.size() > 1) {
+            throw new AmbiguousIdentifierException("Employee with username '" + username + "' is not unique, " + employees.size() + " employees found!");
         }
-        return Optional.of(employees.get(0));
+        return employees.get(0);
     }
 
     private static class EmployeeRowMapper implements RowMapper<Employee> {

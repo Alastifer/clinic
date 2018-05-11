@@ -1,6 +1,8 @@
 package com.clinic.dao.impl;
 
 import com.clinic.dao.AnalyzeDAO;
+import com.clinic.dao.exception.AmbiguousIdentifierException;
+import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Analyze;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -35,12 +37,14 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
     }
 
     @Override
-    public Optional<Analyze> getAnalyzeByIdAndUsername(Long id, String username) {
+    public Analyze getAnalyzeByIdAndUsername(Long id, String username) {
         List<Analyze> analyzes = jdbcTemplate.query(SELECT_ANALYZE_BY_USERNAME_AND_ID, new AnalyzeRowMapper(), username, id);
         if (analyzes.isEmpty()) {
-            return Optional.empty();
+            throw new UnknownIdentifierException("Analyze with id '" + id + "' and username '" + username + "' not found!");
+        } else if (analyzes.size() > 1) {
+            throw new AmbiguousIdentifierException("Analyze with id '" + id + "' and username '" + username + "' is not unique, " + analyzes.size() + " diseases found!");
         }
-        return Optional.of(analyzes.get(0));
+        return analyzes.get(0);
     }
 
     private static class AnalyzeRowMapper implements RowMapper<Analyze> {

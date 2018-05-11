@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface DiseaseDAO {
     List<Disease> getAllDiseasesByUsername(String username);
-    Optional<Disease> getDiseaseByIdAndUsername(Long id, String username);
+    Disease getDiseaseByIdAndUsername(Long id, String username);
 }
