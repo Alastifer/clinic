@@ -17,13 +17,13 @@ public class DefaultTicketDAO implements TicketDAO {
     private JdbcTemplate jdbcTemplate;
 
     private static final String SELECT_TICKETS_BY_USERNAME = "SELECT id, receipt_date, room, employee, patient " +
-                                                             "FROM tickets WHERE patient = ?";
+                                                             "FROM tickets WHERE patient = ? AND receipt_date >= NOW()";
+
+    private static final String SELECT_TICKETS_WITHOUT_PATIENT = "SELECT id, receipt_date, room, employee, patient " +
+                                                                 "FROM tickets WHERE patient IS NULL AND receipt_date >= NOW()";
 
     private static final String UPDATE_SET_NULL_FOR_PATIENT_BY_ID_AND_USERNAME = "UPDATE tickets SET patient = NULL " +
                                                                                  "WHERE id = ? AND patient = ?";
-
-    private static final String SELECT_TICKETS_WITHOUT_PATIENT = "SELECT id, receipt_date, room, employee, patient " +
-                                                                 "FROM tickets WHERE patient IS NULL";
 
     private static final String UPDATE_SET_PATIENT_FOR_TICKET = "UPDATE tickets SET patient = ? " +
                                                                 "WHERE id = ?";
