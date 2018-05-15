@@ -1,4 +1,4 @@
-package com.clinic.web.controller.patient;
+package com.clinic.web.controller;
 
 import com.clinic.web.facade.TicketFacade;
 import org.springframework.stereotype.Controller;

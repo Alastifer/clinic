@@ -1,4 +1,4 @@
-package com.clinic.web.controller.patient;
+package com.clinic.web.controller;
 
 import com.clinic.web.facade.AnalyzeFacade;
 import org.springframework.stereotype.Controller;
@@ -33,5 +33,20 @@ public class AnalyzeController {
         final String username = (String) session.getAttribute(ATTRIBUTE_USERNAME);
         model.addAttribute(ATTRIBUTE_ANALYZE, analyzeFacade.getAnalyzeByIdAndUsername(id, username));
         return "patient/analyze";
+    }
+
+    @GetMapping("/employee/patients/{username}/analyzes")
+    public String getAnalyze(@PathVariable String username,
+                             Model model) {
+        model.addAttribute(ATTRIBUTE_ANALYZES, analyzeFacade.getAllAnalyzesByUsername(username));
+        return "employee/analyzesList";
+    }
+
+    @GetMapping("/employee/patients/{username}/analyzes/{id}")
+    public String getAnalyzes(@PathVariable String username,
+                             @PathVariable Long id,
+                             Model model) {
+        model.addAttribute(ATTRIBUTE_ANALYZE, analyzeFacade.getAnalyzeByIdAndUsername(id, username));
+        return "employee/analyze";
     }
 }
