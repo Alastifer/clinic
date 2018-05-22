@@ -39,7 +39,8 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
     </div>
     <div class="row float-l">
-        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/" class="btn btn-primary m-t-10">Назад</a>
+        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/" class="btn btn-primary m-t-10 m-r-5">Назад</a>
+        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases/add" class="btn btn-primary m-t-10">Добавить</a>
     </div>
     <div class="container-table100">
         <div class="wrap-table100">
@@ -63,12 +64,8 @@
                         <c:forEach var="disease" items="${diseases}">
                             <tr class="row100 body">
                                 <td class="cell100 column1">${disease.id}</td>
-                                <td class="cell100 column2">
-                                    <fmt:formatDate value="${disease.beginDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                </td>
-                                <td class="cell100 column3">
-                                    <fmt:formatDate value="${disease.endDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                </td>
+                                <td class="cell100 column2">${disease.beginDate}</td>
+                                <td class="cell100 column3">${disease.endDate}</td>
                                 <td class="cell100 column4">${disease.type}</td>
                                 <td class="cell100 column5">
                                     <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases/${disease.id}" class="btn btn-primary">Содержание</a>

@@ -8,6 +8,7 @@ import com.clinic.web.model.DiseaseModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class DefaultDiseaseFacade implements DiseaseFacade {
         DiseaseModel diseaseModel = new DiseaseModel();
         diseaseModel.setId(disease.getId());
         diseaseModel.setPatient(patientFacade.getPatientByUsername(disease.getUsername()));
-        diseaseModel.setBeginDate(disease.getBeginDate());
-        diseaseModel.setEndDate(disease.getEndDate());
+        diseaseModel.setBeginDate(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(disease.getBeginDate()));
+        diseaseModel.setEndDate(new SimpleDateFormat("dd-MM-yyyy HH:mm").format(disease.getEndDate()));
         diseaseModel.setType(disease.getType());
         diseaseModel.setContent(disease.getContent());
         return diseaseModel;

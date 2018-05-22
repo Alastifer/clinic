@@ -1,13 +1,25 @@
 package com.clinic.web.model;
 
-import java.sql.Timestamp;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
 
 public class DiseaseModel {
     private Long id;
+
     private PatientModel patient;
-    private Timestamp beginDate;
-    private Timestamp endDate;
+
+    @NotEmpty(message = "{diseaseModel.beginDate.empty}")
+    @Pattern(regexp = "(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))-(?:19|20)[0-9]{2} (0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9])", message = "{diseaseModel.beginDate.invalid}")
+    private String beginDate;
+
+    @NotEmpty(message = "{diseaseModel.endDate.empty}")
+    @Pattern(regexp = "(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))-(?:19|20)[0-9]{2} (0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9])", message = "{diseaseModel.endDate.invalid}")
+    private String endDate;
+
+    @NotEmpty(message = "{diseaseModel.type.empty}")
     private String type;
+
     private String content;
 
     public Long getId() {
@@ -26,19 +38,19 @@ public class DiseaseModel {
         this.patient = patient;
     }
 
-    public Timestamp getBeginDate() {
+    public String getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Timestamp beginDate) {
+    public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
     }
 
-    public Timestamp getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

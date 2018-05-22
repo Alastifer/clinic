@@ -1,18 +1,27 @@
 package com.clinic.web.controller;
 
 import com.clinic.web.facade.DiseaseFacade;
+import com.clinic.web.facade.PatientFacade;
+import com.clinic.web.model.DiseaseModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class DiseaseController {
     @Resource
     private DiseaseFacade diseaseFacade;
+
+    @Resource
+    private PatientFacade patientFacade;
 
     @Resource
     private HttpSession session;
@@ -47,5 +56,27 @@ public class DiseaseController {
                              Model model) {
         model.addAttribute(ATTRIBUTE_DISEASE, diseaseFacade.getDiseaseByIdAndUsername(id, username));
         return "employee/disease";
+    }
+
+    @GetMapping("/employee/patients/{username}/diseases/add")
+    public String addDisease(@PathVariable String username,
+                             Model model) {
+        DiseaseModel diseaseModel = new DiseaseModel();
+        diseaseModel.setPatient(patientFacade.getPatientByUsername(username));
+        model.addAttribute(ATTRIBUTE_DISEASE, diseaseModel);
+        return "employee/addDisease";
+    }
+
+    @PostMapping("/employee/patients/{username}/diseases/add")
+    public String addDisease(@Valid @ModelAttribute("disease") DiseaseModel disease,
+                             BindingResult bindingResult,
+                             @PathVariable String username) {
+        disease.setPatient(patientFacade.getPatientByUsername(username));
+
+        if (bindingResult.hasErrors()) {
+            return "employee/addDisease";
+        }
+
+        return "redirect:/employee/patients/" + username + "/diseases";
     }
 }
