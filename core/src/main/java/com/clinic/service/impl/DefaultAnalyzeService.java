@@ -38,4 +38,14 @@ public class DefaultAnalyzeService implements AnalyzeService {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
+
+    @Override
+    public List<String> getAllAnalyzeTypes() {
+        return analyzeDAO.getAllAnalyzeTypes();
+    }
+
+    @Override
+    public void save(Analyze analyze) {
+        analyzeDAO.save(analyze);
+    }
 }

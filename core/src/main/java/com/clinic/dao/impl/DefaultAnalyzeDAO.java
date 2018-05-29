@@ -4,15 +4,22 @@ import com.clinic.dao.AnalyzeDAO;
 import com.clinic.dao.exception.AmbiguousIdentifierException;
 import com.clinic.dao.exception.UnknownIdentifierException;
 import com.clinic.model.Analyze;
+import com.clinic.model.AnalyzeType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class DefaultAnalyzeDAO implements AnalyzeDAO {
@@ -31,6 +38,11 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
                                                                     "JOIN analyze_types ON analyzes.id_type = analyze_types.id " +
                                                                     "WHERE username = ? AND analyzes.id = ?";
 
+    private static final String SELECT_ALL_ANALYZE_TYPES = "SELECT id, name FROM analyze_types";
+
+    private static final String INSERT_ANALYZE = "INSERT INTO analyzes (receiving_date, content, username, id_type) " +
+                                                 "VALUES (?, ?, ?, ?)";
+
     @Override
     public List<Analyze> getAllAnalyzesByUsername(String username) {
         return jdbcTemplate.query(SELECT_ALL_ANALYZES_BY_USERNAME, new AnalyzeRowMapper(), username);
@@ -47,6 +59,34 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
         return analyzes.get(0);
     }
 
+    @Override
+    public List<String> getAllAnalyzeTypes() {
+        return jdbcTemplate.query(SELECT_ALL_ANALYZE_TYPES, new AnalyzeTypeRowMapper()).stream()
+                .map(AnalyzeType::getName)
+                .collect(toList());
+    }
+
+    @Override
+    public void save(Analyze analyze) {
+        Date receivingDate = new Date(convert(analyze.getReceivingDate()));
+        Long typeId = jdbcTemplate.query(SELECT_ALL_ANALYZE_TYPES, new AnalyzeTypeRowMapper()).stream()
+                .filter(analyzeType -> analyzeType.getName().equals(analyze.getType()))
+                .map(AnalyzeType::getId)
+                .collect(toList()).get(0);
+        jdbcTemplate.update(INSERT_ANALYZE, receivingDate,
+                                            analyze.getContent(),
+                                            analyze.getUsername(),
+                                            typeId);
+    }
+
+    private long convert(Timestamp dateTime) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateTime.toString()).getTime();
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
     private static class AnalyzeRowMapper implements RowMapper<Analyze> {
         @Override
         public Analyze mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -57,6 +97,16 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
             analyze.setReceivingDate(rs.getTimestamp("receiving_date"));
             analyze.setContent(rs.getString("content"));
             return analyze;
+        }
+    }
+
+    private static class AnalyzeTypeRowMapper implements RowMapper<AnalyzeType> {
+        @Override
+        public AnalyzeType mapRow(ResultSet rs, int rowNum) throws SQLException {
+            AnalyzeType analyzeType = new AnalyzeType();
+            analyzeType.setId(rs.getLong("id"));
+            analyzeType.setName(rs.getString("name"));
+            return analyzeType;
         }
     }
 }

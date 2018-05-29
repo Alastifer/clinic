@@ -8,7 +8,11 @@ import com.clinic.web.model.AnalyzeModel;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -37,13 +41,36 @@ public class DefaultAnalyzeFacade implements AnalyzeFacade {
         return createModel(analyze);
     }
 
+    @Override
+    public void save(AnalyzeModel analyzeModel) {
+        Analyze analyze = new Analyze();
+        analyze.setId(analyzeModel.getId());
+        analyze.setUsername(analyzeModel.getPatient().getUsername());
+        analyze.setReceivingDate(convertToTimestamp(analyzeModel.getReceivingDate() + ":00"));
+        analyze.setType(analyzeModel.getType());
+        analyze.setContent(analyzeModel.getContent());
+        analyzeService.save(analyze);
+    }
+
     private AnalyzeModel createModel(Analyze analyze) {
         AnalyzeModel analyzeModel = new AnalyzeModel();
         analyzeModel.setId(analyze.getId());
         analyzeModel.setPatient(patientFacade.getPatientByUsername(analyze.getUsername()));
-        analyzeModel.setReceivingDate(analyze.getReceivingDate());
+        analyzeModel.setReceivingDate(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(analyze.getReceivingDate()));
         analyzeModel.setType(analyze.getType());
         analyzeModel.setContent(analyze.getContent());
         return analyzeModel;
+    }
+
+    private Timestamp convertToTimestamp(String dateString) {
+        Date date;
+        try {
+            date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateString);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+        dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+        return Timestamp.valueOf(dateString);
     }
 }

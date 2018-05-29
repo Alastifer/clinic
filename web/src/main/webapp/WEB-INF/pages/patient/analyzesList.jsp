@@ -62,9 +62,7 @@
                         <c:forEach var="analyze" items="${analyzes}">
                             <tr class="row100 body">
                                 <td class="cell100 column1">${analyze.id}</td>
-                                <td class="cell100 column2">
-                                    <fmt:formatDate value="${analyze.receivingDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                </td>
+                                <td class="cell100 column2">${analyze.receivingDate}</td>
                                 <td class="cell100 column3">${analyze.type}</td>
                                 <td class="cell100 column4">
                                     <a href="${pageContext.request.contextPath}/patient/analyzes/${analyze.id}" class="btn btn-primary">Содержание</a>

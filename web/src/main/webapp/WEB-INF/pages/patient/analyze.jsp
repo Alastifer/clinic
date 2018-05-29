@@ -34,9 +34,7 @@
                                 </tr>
                                 <tr>
                                     <td>Дата получения</td>
-                                    <td>
-                                        <fmt:formatDate value="${analyze.receivingDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                    </td>
+                                    <td>${analyze.receivingDate}</td>
                                 </tr>
                                 <tr>
                                     <td>Тип анализа</td>

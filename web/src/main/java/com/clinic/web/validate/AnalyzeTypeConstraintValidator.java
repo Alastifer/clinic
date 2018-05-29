@@ -1,24 +1,22 @@
-package com.clinic.web.validate.disease;
+package com.clinic.web.validate;
 
-import com.clinic.service.DiseaseService;
+import com.clinic.service.AnalyzeService;
 
 import javax.annotation.Resource;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.List;
 
-public class DiseaseTypeConstraintValidator implements ConstraintValidator<DiseaseType, String> {
+public class AnalyzeTypeConstraintValidator implements ConstraintValidator<AnalyzeType, String> {
     @Resource
-    private DiseaseService diseaseService;
+    private AnalyzeService analyzeService;
 
     @Override
-    public void initialize(DiseaseType constraintAnnotation) {}
+    public void initialize(AnalyzeType constraintAnnotation) {}
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        List<String> availableTypes = diseaseService.getAllDiseaseTypes();
+        List<String> availableTypes = analyzeService.getAllAnalyzeTypes();
         long count = availableTypes.stream()
                 .map(String::toUpperCase)
                 .filter(s -> s.equals(value.toUpperCase()))

@@ -1,6 +1,6 @@
 package com.clinic.web.model;
 
-import com.clinic.web.validate.disease.DiseaseType;
+import com.clinic.web.validate.DiseaseType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;

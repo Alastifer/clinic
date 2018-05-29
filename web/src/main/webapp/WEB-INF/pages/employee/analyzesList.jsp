@@ -39,7 +39,8 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
     </div>
     <div class="row float-l">
-        <a href="${pageContext.request.contextPath}/employee/patients/${analyzes[0].patient.username}" class="btn btn-primary m-t-10">Назад</a>
+        <a href="${pageContext.request.contextPath}/employee/patients/${analyzes[0].patient.username}/" class="btn btn-primary m-t-10 m-r-5">Назад</a>
+        <a href="${pageContext.request.contextPath}/employee/patients/${analyzes[0].patient.username}/analyzes/add" class="btn btn-primary m-t-10">Добавить</a>
     </div>
     <div class="container-table100">
         <div class="wrap-table100">
@@ -62,9 +63,7 @@
                         <c:forEach var="analyze" items="${analyzes}">
                             <tr class="row100 body">
                                 <td class="cell100 column1">${analyze.id}</td>
-                                <td class="cell100 column2">
-                                    <fmt:formatDate value="${analyze.receivingDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                </td>
+                                <td class="cell100 column2">${analyze.receivingDate}</td>
                                 <td class="cell100 column3">${analyze.type}</td>
                                 <td class="cell100 column4">
                                     <a href="${pageContext.request.contextPath}/employee/patients/${analyze.patient.username}/analyzes/${analyze.id}" class="btn btn-primary">Содержание</a>

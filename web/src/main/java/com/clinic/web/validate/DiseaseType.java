@@ -1,4 +1,4 @@
-package com.clinic.web.validate.disease;
+package com.clinic.web.validate;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
