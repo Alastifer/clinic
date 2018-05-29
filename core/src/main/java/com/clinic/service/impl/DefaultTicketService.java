@@ -48,4 +48,9 @@ public class DefaultTicketService implements TicketService {
 
         ticketDAO.orderTicketByIdAndUsername(id, username);
     }
+
+    @Override
+    public List<Ticket> getAllTickets() {
+        return ticketDAO.getAllTickets();
+    }
 }

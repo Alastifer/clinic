@@ -47,7 +47,7 @@
                             </table>
 
                             <a href="${pageContext.request.contextPath}/employee/patients" class="btn btn-primary">Пациенты</a>
-                            <a href="" class="btn btn-primary">Талоны</a>
+                            <a href="${pageContext.request.contextPath}/employee/tickets" class="btn btn-primary">Талоны</a>
                         </div>
                     </div>
                 </div>

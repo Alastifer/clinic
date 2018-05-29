@@ -45,6 +45,12 @@ public class DefaultTicketFacade implements TicketFacade {
         ticketService.orderTicketByIdAndUsername(id, username);
     }
 
+    @Override
+    public List<TicketModel> getAllTickets() {
+        List<Ticket> tickets = ticketService.getAllTickets();
+        return createList(tickets);
+    }
+
     private TicketModel createModel(Ticket ticket) {
         TicketModel ticketModel = new TicketModel();
         ticketModel.setId(ticket.getId());

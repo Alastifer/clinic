@@ -9,4 +9,5 @@ public interface TicketService {
     void cancelTicketByIdAndUsername(Long id, String username);
     List<Ticket> getTicketsForOrder();
     void orderTicketByIdAndUsername(Long id, String username);
+    List<Ticket> getAllTickets();
 }

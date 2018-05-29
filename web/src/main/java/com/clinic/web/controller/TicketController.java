@@ -47,4 +47,10 @@ public class TicketController {
         ticketFacade.orderTicketByIdAndUsername(ticketForOrder, username);
         return "redirect:/patient/tickets";
     }
+
+    @GetMapping("/employee/tickets")
+    public String getAllTickets(Model model) {
+        model.addAttribute(ATTRIBUTE_TICKETS, ticketFacade.getAllTickets());
+        return "/employee/ticketsList";
+    }
 }

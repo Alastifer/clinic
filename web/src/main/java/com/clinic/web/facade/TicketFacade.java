@@ -9,4 +9,5 @@ public interface TicketFacade {
     void cancelTicketByIdAndUsername(Long id, String username);
     List<TicketModel> getTicketsForOrder();
     void orderTicketByIdAndUsername(Long id, String username);
+    List<TicketModel> getAllTickets();
 }
