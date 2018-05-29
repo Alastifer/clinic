@@ -39,4 +39,14 @@ public class DefaultDiseaseService implements DiseaseService {
             throw new IllegalArgumentException(e.getMessage(), e);
         }
     }
+
+    @Override
+    public List<String> getAllDiseaseTypes() {
+        return diseaseDAO.getAllDiseaseTypes();
+    }
+
+    @Override
+    public void save(Disease disease) {
+        diseaseDAO.save(disease);
+    }
 }

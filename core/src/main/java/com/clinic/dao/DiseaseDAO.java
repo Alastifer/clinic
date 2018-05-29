@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface DiseaseDAO {
     List<Disease> getAllDiseasesByUsername(String username);
     Disease getDiseaseByIdAndUsername(Long id, String username);
+    List<String> getAllDiseaseTypes();
+    void save(Disease disease);
 }

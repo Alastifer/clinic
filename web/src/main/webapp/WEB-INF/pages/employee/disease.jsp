@@ -34,15 +34,11 @@
                                 </tr>
                                 <tr>
                                     <td>Дата начала</td>
-                                    <td>
-                                        <fmt:formatDate value="${disease.beginDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                    </td>
+                                    <td>${disease.beginDate}</td>
                                 </tr>
                                 <tr>
                                     <td>Дата окончания</td>
-                                    <td>
-                                        <fmt:formatDate value="${disease.endDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                    </td>
+                                    <td>${disease.endDate}</td>
                                 </tr>
                                 <tr>
                                     <td>Диагноз</td>

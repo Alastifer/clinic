@@ -1,5 +1,6 @@
 package com.clinic.web.model;
 
+import com.clinic.web.validate.disease.DiseaseType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
@@ -18,6 +19,7 @@ public class DiseaseModel {
     private String endDate;
 
     @NotEmpty(message = "{diseaseModel.type.empty}")
+    @DiseaseType(message = "{diseaseModel.type.incorrect}")
     private String type;
 
     private String content;

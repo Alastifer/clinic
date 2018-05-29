@@ -63,12 +63,8 @@
                                 <c:forEach var="disease" items="${diseases}">
                                     <tr class="row100 body">
                                         <td class="cell100 column1">${disease.id}</td>
-                                        <td class="cell100 column2">
-                                            <fmt:formatDate value="${disease.beginDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                        </td>
-                                        <td class="cell100 column3">
-                                            <fmt:formatDate value="${disease.endDate}" pattern="dd-MM-yyyy HH:mm"/>
-                                        </td>
+                                        <td class="cell100 column2">${disease.beginDate}</td>
+                                        <td class="cell100 column3">${disease.endDate}</td>
                                         <td class="cell100 column4">${disease.type}</td>
                                         <td class="cell100 column5">
                                             <a href="${pageContext.request.contextPath}/patient/diseases/${disease.id}" class="btn btn-primary">Содержание</a>

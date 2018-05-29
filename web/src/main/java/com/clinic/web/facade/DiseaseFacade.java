@@ -7,4 +7,5 @@ import java.util.List;
 public interface DiseaseFacade {
     List<DiseaseModel> getAllDiseasesByUsername(String username);
     DiseaseModel getDiseaseByIdAndUsername(Long id, String username);
+    void save(DiseaseModel diseaseModel);
 }
