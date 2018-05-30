@@ -8,4 +8,5 @@ public interface AnalyzeFacade {
     List<AnalyzeModel> getAllAnalyzesByUsername(String username);
     AnalyzeModel getAnalyzeByIdAndUsername(Long id, String username);
     void save(AnalyzeModel analyzeModel);
+    void delete(Long id);
 }

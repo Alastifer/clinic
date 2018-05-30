@@ -82,4 +82,17 @@ public class AnalyzeController {
         analyzeFacade.save(analyzeModel);
         return "redirect:/employee/patients/" + username + "/analyzes";
     }
+
+    @GetMapping("/employee/patients/{username}/analyzes/delete")
+    public String showAnalyzesForDelete(@PathVariable String username, Model model) {
+        model.addAttribute(ATTRIBUTE_ANALYZES, analyzeFacade.getAllAnalyzesByUsername(username));
+        return "employee/deleteAnalyze";
+    }
+
+    @PostMapping("/employee/patients/{username}/analyzes/{analyzeId}/delete")
+    public String deleteAnalyze(@PathVariable String username,
+                                @PathVariable Long analyzeId) {
+        analyzeFacade.delete(analyzeId);
+        return "redirect:/employee/patients/" + username + "/analyzes/delete";
+    }
 }

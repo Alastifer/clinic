@@ -43,6 +43,8 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
     private static final String INSERT_ANALYZE = "INSERT INTO analyzes (receiving_date, content, username, id_type) " +
                                                  "VALUES (?, ?, ?, ?)";
 
+    private static final String DELETE_ANALYZE = "DELETE FROM analyzes WHERE id = ?";
+
     @Override
     public List<Analyze> getAllAnalyzesByUsername(String username) {
         return jdbcTemplate.query(SELECT_ALL_ANALYZES_BY_USERNAME, new AnalyzeRowMapper(), username);
@@ -77,6 +79,11 @@ public class DefaultAnalyzeDAO implements AnalyzeDAO {
                                             analyze.getContent(),
                                             analyze.getUsername(),
                                             typeId);
+    }
+
+    @Override
+    public void delete(Long id) {
+        jdbcTemplate.update(DELETE_ANALYZE, id);
     }
 
     private long convert(Timestamp dateTime) {

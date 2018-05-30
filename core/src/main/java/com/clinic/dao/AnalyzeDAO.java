@@ -10,4 +10,5 @@ public interface AnalyzeDAO {
     Analyze getAnalyzeByIdAndUsername(Long id, String username);
     List<String> getAllAnalyzeTypes();
     void save(Analyze analyze);
+    void delete(Long id);
 }

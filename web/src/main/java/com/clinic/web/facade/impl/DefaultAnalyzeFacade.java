@@ -52,6 +52,11 @@ public class DefaultAnalyzeFacade implements AnalyzeFacade {
         analyzeService.save(analyze);
     }
 
+    @Override
+    public void delete(Long id) {
+        analyzeService.delete(id);
+    }
+
     private AnalyzeModel createModel(Analyze analyze) {
         AnalyzeModel analyzeModel = new AnalyzeModel();
         analyzeModel.setId(analyze.getId());

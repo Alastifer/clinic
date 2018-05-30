@@ -46,6 +46,19 @@ public class DefaultAnalyzeService implements AnalyzeService {
 
     @Override
     public void save(Analyze analyze) {
+        if (analyze == null) {
+            throw new IllegalArgumentException("Analyze must not be null");
+        }
+
         analyzeDAO.save(analyze);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id must not be null");
+        }
+
+        analyzeDAO.delete(id);
     }
 }
