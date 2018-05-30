@@ -39,9 +39,7 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary m-t-10">Выход</a>
     </div>
     <div class="row float-l">
-        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/" class="btn btn-primary m-t-10 m-r-5">Назад</a>
-        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases/add" class="btn btn-primary m-t-10 m-r-5">Добавить</a>
-        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases/delete" class="btn btn-primary m-t-10">Удалить</a>
+        <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases" class="btn btn-primary m-t-10 m-r-5">Назад</a>
     </div>
     <div class="container-table100">
         <div class="wrap-table100">
@@ -54,7 +52,7 @@
                             <th class="cell100 column2">Дата начала</th>
                             <th class="cell100 column3">Дата окончания</th>
                             <th class="cell100 column4">Диагноз</th>
-                            <th class="cell100 column5">Содержание</th>
+                            <th class="cell100 column5">Удалить</th>
                         </tr>
                         </thead>
                     </table>
@@ -69,7 +67,9 @@
                                 <td class="cell100 column3">${disease.endDate}</td>
                                 <td class="cell100 column4">${disease.type}</td>
                                 <td class="cell100 column5">
-                                    <a href="${pageContext.request.contextPath}/employee/patients/${diseases[0].patient.username}/diseases/${disease.id}" class="btn btn-primary">Содержание</a>
+                                    <form method="POST" action="${pageContext.request.contextPath}/employee/patients/${disease.patient.username}/diseases/${disease.id}/delete">
+                                        <button type="submit" class="btn btn-primary">Удалить</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>

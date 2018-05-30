@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -81,5 +82,18 @@ public class DiseaseController {
 
         diseaseFacade.save(disease);
         return "redirect:/employee/patients/" + username + "/diseases";
+    }
+
+    @GetMapping("/employee/patients/{username}/diseases/delete")
+    public String showDiseaseForDelete(@PathVariable String username, Model model) {
+        model.addAttribute(ATTRIBUTE_DISEASES, diseaseFacade.getAllDiseasesByUsername(username));
+        return "employee/deleteDisease";
+    }
+
+    @PostMapping("/employee/patients/{username}/diseases/{diseaseId}/delete")
+    public String deleteDisease(@PathVariable String username,
+                                @PathVariable Long diseaseId) {
+        diseaseFacade.delete(diseaseId);
+        return "redirect:/employee/patients/" + username + "/diseases/delete";
     }
 }

@@ -9,4 +9,5 @@ public interface DiseaseService {
     Disease getDiseaseByIdAndUsername(Long id, String username);
     List<String> getAllDiseaseTypes();
     void save(Disease disease);
+    void remove(Long id);
 }

@@ -47,6 +47,8 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
     private static final String INSERT_DISEASE = "INSERT INTO diseases (begin_date, end_date, id_type, content, username) " +
                                                  "VALUES (?, ?, ?, ?, ?)";
 
+    private static final String DELETE_DISEASE = "DELETE FROM diseases WHERE id = ?";
+
     @Override
     public List<Disease> getAllDiseasesByUsername(String username) {
         return jdbcTemplate.query(SELECT_ALL_DISEASES_BY_USERNAME, new DiseaseRowMapper(), username);
@@ -83,6 +85,11 @@ public class DefaultDiseaseDAO implements DiseaseDAO {
                                             typeId,
                                             disease.getContent(),
                                             disease.getUsername());
+    }
+
+    @Override
+    public void remove(Long id) {
+        jdbcTemplate.update(DELETE_DISEASE, id);
     }
 
     private long convert(Timestamp dateTime) {

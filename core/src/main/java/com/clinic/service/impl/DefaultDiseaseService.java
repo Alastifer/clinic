@@ -47,6 +47,19 @@ public class DefaultDiseaseService implements DiseaseService {
 
     @Override
     public void save(Disease disease) {
+        if (disease == null) {
+            throw new IllegalArgumentException("Disease must not be null");
+        }
+
         diseaseDAO.save(disease);
+    }
+
+    @Override
+    public void remove(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id must not be null");
+        }
+
+        diseaseDAO.remove(id);
     }
 }

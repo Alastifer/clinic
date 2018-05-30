@@ -52,6 +52,11 @@ public class DefaultDiseaseFacade implements DiseaseFacade {
         diseaseService.save(disease);
     }
 
+    @Override
+    public void delete(Long id) {
+        diseaseService.remove(id);
+    }
+
     private DiseaseModel createModel(Disease disease) {
         DiseaseModel diseaseModel = new DiseaseModel();
         diseaseModel.setId(disease.getId());
