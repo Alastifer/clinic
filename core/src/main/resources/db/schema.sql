@@ -5,11 +5,11 @@ DROP TABLE IF EXISTS diseases;
 DROP TABLE IF EXISTS disease_types;
 DROP TABLE IF EXISTS user2roles;
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS user2address;
 DROP TABLE IF EXISTS user_details;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS hospitals;
-DROP TABLE IF EXISTS user_address;
 DROP TABLE IF EXISTS addresses;
 DROP TABLE IF EXISTS countries;
 DROP TABLE IF EXISTS cities;
@@ -72,15 +72,6 @@ CREATE TABLE hospitals
     FOREIGN KEY (address_id) REFERENCES addresses (id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE user_address
-(
-    username   VARCHAR(50) NOT NULL,
-    address_id BIGINT      NOT NULL,
-    UNIQUE (username, address_id),
-    FOREIGN KEY (username) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (address_id) REFERENCES addresses (id) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
 CREATE TABLE positions
 (
     id   BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -92,7 +83,6 @@ CREATE TABLE user_details
     username     VARCHAR(50) PRIMARY KEY,
     first_name   VARCHAR(50)  NOT NULL,
     last_name    VARCHAR(50),
-    address      VARCHAR(100) NOT NULL,
     birth_day    DATE         NOT NULL,
     phone_number VARCHAR(30)  NOT NULL,
     id_position  BIGINT,
@@ -100,6 +90,15 @@ CREATE TABLE user_details
     FOREIGN KEY (username) REFERENCES users (username) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY (id_position) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (hospital_id) REFERENCES hospitals (code) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+CREATE TABLE user2address
+(
+    username   VARCHAR(50) NOT NULL,
+    address_id BIGINT      NOT NULL,
+    UNIQUE (username, address_id),
+    FOREIGN KEY (username) REFERENCES user_details (username) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (address_id) REFERENCES addresses (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE disease_types
